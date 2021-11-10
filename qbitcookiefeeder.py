@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 import os
 import time
-import logging
 import toml
+import logging
 import subprocess
 import qbittorrentapi
 
