@@ -1,0 +1,17 @@
+#### Qbittorrent Details
+host = "localhost:8080"
+username = "username"
+password = "password123"
+qbitLogFile = "/opt/qbittorrentvpn/qBittorrent/data/logs/qbittorrent.log"
+
+#### Tracker Details
+[trackers]
+    [trackers.tracker_1]
+        name = "linux-iso-tracker"
+        downloadLink = "https://linux-iso-tracker.com/download.php?"
+        cookie = "user=12345;pass=asdfjklasdfjklasdfjklasdfjklasdfjkl"
+
+    [trackers.tracker_2]
+        name = "game-update-tracker"
+        downloadLink = "https://game-update-tracker.com/download.php?"
+        cookie = "user=54321;pass=asdfjklasdfjklasdfjklasdfjklasdfjkl"
