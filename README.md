@@ -59,10 +59,10 @@ qBittorrent will save the cookies in memory even if the provided link does not d
    sudo python3 -m pip install -r requirements.txt
    ```
 
-1. Edit config file. You may include as many trackers as you wish.
+1. Rename the example config file and edit it. You may include as many trackers as you wish.
 
    ```
-   nano config.toml
+   mv config.toml.example config.toml && nano config.toml
    ```
 
 1. Run script using crontab.
