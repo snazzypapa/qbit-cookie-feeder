@@ -35,7 +35,12 @@ def add_cookies():
             logging.info("Failed to add link to client for tracker: {tracker['name']}")
 
 
-def read_logs(filename, out_q):
+def output_new_lines(filename, out_q):
+    """ Outputs new lines of text file to queue
+        Args:
+             filename: path to text file to watch
+             out_q: queue from threading to post new lines
+    """
     logging.info("Starting log watcher")
     f = subprocess.Popen(
         ["tail", "-F", filename], stdout=subprocess.PIPE, stderr=subprocess.PIPE
@@ -45,12 +50,17 @@ def read_logs(filename, out_q):
         out_q.put(line)
 
 
-def log_parser(in_q):
+def parse_new_lines(match_string, in_q):
+    """ Reads lines from queue and run add_cookies() if text is found
+        Args:
+            string_: string to match in lines
+            in_q: queue from threading to watch
+    """
     logging.info("Starting log parser")
     time_added = 0
     while True:
         line = in_q.get()
-        if b"Web UI: Now listening on IP" in line and time.time() - time_added > 10:
+        if match_string.encode('UTF-8') in line and time.time() - time_added > 10:
             logging.info("Detected qbittorrent start - adding cookies")
             add_cookies()
             time_added = time.time()
@@ -58,8 +68,8 @@ def log_parser(in_q):
 
 def main():
     q = Queue()
-    t1 = Thread(target=read_logs, args=(config["qbitLogFile"], q))
-    t2 = Thread(target=log_parser, args=(q,))
+    t1 = Thread(target=output_new_lines, args=(config["qbitLogFile"], q))
+    t2 = Thread(target=parse_new_lines, args=("Web UI: Now listening on IP", q))
     t1.start()
     t2.start()
 
