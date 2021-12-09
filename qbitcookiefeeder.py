@@ -32,7 +32,7 @@ def add_cookies():
                 f"Successfully added link to client for tracker: {tracker['name']}"
             )
         else:
-            logging.info("Failed to add link to client for tracker: {tracker['name']}")
+            logging.info(f"Failed to add link to client for tracker: {tracker['name']}")
 
 
 def output_new_lines(filename, out_q):
