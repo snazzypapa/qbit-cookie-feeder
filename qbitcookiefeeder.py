@@ -53,7 +53,7 @@ def output_new_lines(filename, out_q):
 def parse_new_lines(match_string, in_q):
     """ Reads lines from queue and run add_cookies() if text is found
         Args:
-            string_: string to match in lines
+            match_string: string to match in lines
             in_q: queue from threading to watch
     """
     logging.info("Starting log parser")
